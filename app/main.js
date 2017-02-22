@@ -1,5 +1,6 @@
 let debug = true;
 
+const {autoUpdater} = require("electron-updater");
 const electron = require('electron');
 const { app, BrowserWindow, ipcMain } = electron;
 var fs = require('fs');
@@ -84,3 +85,34 @@ function parseScores(raw) {
     }
     scores.push(parseInt(number));
 }
+
+
+//update stufffffffffffffffffff
+
+autoUpdater.on('checking-for-update', () => {
+  consooe.log('Checking for update...');
+})
+autoUpdater.on('update-available', (ev, info) => {
+  consooe.log('Update available.');
+})
+autoUpdater.on('update-not-available', (ev, info) => {
+  consooe.log('Update not available.');
+})
+autoUpdater.on('error', (ev, err) => {
+  consooe.log('Error in auto-updater.');
+})
+autoUpdater.on('download-progress', (ev, progressObj) => {
+  consooe.log('Download progress...');
+  log.info('progressObj', progressObj);
+})
+autoUpdater.on('update-downloaded', (ev, info) => {
+  consooe.log('Update downloaded.  Will quit and install in 5 seconds.');
+  // Wait 5 seconds, then quit and install
+  setTimeout(function() {
+    autoUpdater.quitAndInstall();
+  }, 5000)
+})
+// Wait a second for the window to exist before checking for updates.
+setTimeout(function() {
+  autoUpdater.checkForUpdates()
+}, 1000);

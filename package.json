@@ -10,9 +10,10 @@
         "dist": "build"
     },
     "build": {
-        "appId": "your.id",
-        "mac": {
-            "category": "Entertainment"
-        }
+        "publish": [{
+            "provider": "github",
+            "owner": "CameronC17",
+            "repo": "FlappyBalmAutoUpdate"
+        }]
     }
 }

@@ -4,5 +4,8 @@
     "description": "make sure you collect your train tickets!",
     "author": "CameronC",
     "license": "ISC",
-    "main": "main.js"
+    "main": "main.js",
+    "dependencies": {
+        "electron-updater": "^1.7.1"
+    }
 }
