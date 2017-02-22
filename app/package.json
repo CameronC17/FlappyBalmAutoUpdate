@@ -1,0 +1,8 @@
+{
+    "name": "FlappyBalm",
+    "version": "1.0.0",
+    "description": "make sure you collect your train tickets!",
+    "author": "CameronC",
+    "license": "ISC",
+    "main": "main.js"
+}

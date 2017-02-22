@@ -1,15 +1,18 @@
 {
-  "name": "camsapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "electron main.js"
-  },
-  "devDependencies": {
-    "electron": "^1.4.15",
-    "electron-builder": "^13.11.1"
-  },
-  "author": "",
-  "license": "ISC"
+    "devDependencies": {
+        "electron": "^1.4.15",
+        "electron-builder": "^13.11.1",
+        "electron-updater": "^1.7.1"
+    },
+    "scripts": {
+        "start": "electron app/main.js",
+        "pack": "build --dir",
+        "dist": "build"
+    },
+    "build": {
+        "appId": "your.id",
+        "mac": {
+            "category": "Entertainment"
+        }
+    }
 }

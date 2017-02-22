@@ -40,7 +40,7 @@ function devTools(window) {
 readFile();
 
 function readFile() {
-    fs.readFile('data/scores.txt', 'utf-8', function (err, data) {
+    fs.readFile('app/data/scores.txt', 'utf-8', function (err, data) {
           if(err){
               console.log("An error ocurred reading the file :" + err.message);
               return;
@@ -52,7 +52,7 @@ function readFile() {
 
 function writeFile() {
     let content = encodeScores();
-    fs.writeFile('data/scores.txt', content, function (err) {
+    fs.writeFile('app/data/scores.txt', content, function (err) {
       if(err){
             console.log("An error ocurred updating the file: "+ err.message);
             return;
