@@ -1,23 +1,26 @@
-let debug = true;
+let debug = false;
 
 const {autoUpdater} = require("electron-updater");
 const electron = require('electron');
 const { app, BrowserWindow, ipcMain } = electron;
 var fs = require('fs');
+let indexWindow;
 
 var scores = [];
 
 app.on('ready', () => {
-    let window = new BrowserWindow({width: 800, height: 600});
-    window.loadURL(`file://${__dirname}/public/index.html`);
+    indexWindow = new BrowserWindow({width: 800, height: 600});
 
     //for saving scores
-    window.on('close', (e) => {
+    indexWindow.on('close', (e) => {
         writeFile();
-    })
+    });
+
+    indexWindow.loadURL(`file://${__dirname}/public/index.html`);
 
     if (debug)
-        devTools(window);
+        devTools(indexWindow);
+
 })
 
 ipcMain.on('startGame', (e) => {
@@ -86,27 +89,24 @@ function parseScores(raw) {
     scores.push(parseInt(number));
 }
 
-
 //update stufffffffffffffffffff
-
 autoUpdater.on('checking-for-update', () => {
-  consooe.log('Checking for update...');
+  indexWindow.send('autoupdaterfunction', 'Checking for update...');
 })
 autoUpdater.on('update-available', (ev, info) => {
-  consooe.log('Update available.');
+  indexWindow.send('autoupdaterfunctiontwo', 'Update available.', ev, info);
 })
 autoUpdater.on('update-not-available', (ev, info) => {
-  consooe.log('Update not available.');
+  indexWindow.send('autoupdaterfunctiontwo', 'Update not available.', ev, info);
 })
 autoUpdater.on('error', (ev, err) => {
-  consooe.log('Error in auto-updater.');
+  indexWindow.send('autoupdaterfunctiontwo', 'Error in auto-updater.', ev, err);
 })
 autoUpdater.on('download-progress', (ev, progressObj) => {
-  consooe.log('Download progress...');
-  log.info('progressObj', progressObj);
+  indexWindow.send('autoupdaterfunctiontwo', 'Download progress...', ev, progressObj);
 })
 autoUpdater.on('update-downloaded', (ev, info) => {
-  consooe.log('Update downloaded.  Will quit and install in 5 seconds.');
+  indexWindow.send('autoupdaterfunctiontwo', 'Update downloaded.  Will quit and install in 5 seconds.', ev, info);
   // Wait 5 seconds, then quit and install
   setTimeout(function() {
     autoUpdater.quitAndInstall();
